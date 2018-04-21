@@ -10,9 +10,9 @@ export class Http_provider {
         }
 
         //variables
-        this.url = '104.254.246.27:3000'; 
+        this.url = 'api.cebroker.com';
 
-        this.fullURL = `http://${this.url}`;
+        this.fullURL = `https://${this.url}/v1/cerenewaltransactions`;
 
         //Return always the same instance.
         return instance

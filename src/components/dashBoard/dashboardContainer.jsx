@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 import { DashboardPresentational } from './dashboardPresentational';
 import { SideMenuContainer } from '../sideMenu/sideMenuContainer';
+import { Log_Provider } from '../../providers/logsProvider/logProvider';
+
 
 export class DashBoardContainer extends Component {
 
@@ -13,13 +15,30 @@ export class DashBoardContainer extends Component {
     super(props);
 
     this.state = {
-      isMenuOpen: true
+      isMenuOpen: true,
+      isLoading: true,
+      _log: new Log_Provider(),
+      pageTitle: 'Logs'
     }
   }
+
+
+  //=================================================================
+  //  LifeCycle.
+  //=================================================================
+
+  componentDidMount() {
+    this.state._log.getLogsListObservable().subscribe((res) => {
+      console.log(res);
+    })
+  }
+
 
   //=================================================================
   //  Main methods.
   //=================================================================
+
+
 
   //=================================================================
   //  Events.
@@ -45,6 +64,7 @@ export class DashBoardContainer extends Component {
         <DashboardPresentational
           isMenuOpen={this.state.isMenuOpen}
           toggleSideMenu={this.toggleSideMenu}
+          pageTitle={this.state.pageTitle}
         />
       </div>
     )

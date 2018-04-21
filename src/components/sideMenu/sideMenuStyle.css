@@ -41,3 +41,9 @@
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
+
+.logo {
+    width: auto;
+    height: 200px;
+    margin-bottom: 30px;
+}

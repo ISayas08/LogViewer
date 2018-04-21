@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { SideMenuPresentational } from './sideMenuPresentational';
 import { Route_provider } from '../../providers/routesProvider/routesProvider';
+import { Resource_provider } from '../../providers/resourceProvider/resourceProvider';
 
 export class SideMenuContainer extends React.Component {
 
@@ -15,7 +16,8 @@ export class SideMenuContainer extends React.Component {
         super(props);
 
         this.state = {
-            routeProvider: new Route_provider()
+            routeProvider: new Route_provider(),
+            _R: new Resource_provider()
         };
     }
 
@@ -28,6 +30,7 @@ export class SideMenuContainer extends React.Component {
             <SideMenuPresentational
                 {...this.props}
                 links={this.state.routeProvider.getMapedRoutesAsLinks()}
+                _R={this.state._R}
             />
         </div>;
     }
