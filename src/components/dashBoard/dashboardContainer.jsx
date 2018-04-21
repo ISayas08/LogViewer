@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { DashboardPresentational } from './dashboardPresentational';
 import { SideMenuContainer } from '../sideMenu/sideMenuContainer';
 import { Log_Provider } from '../../providers/logsProvider/logProvider';
-
+import { LogItemContainer } from '../logItem/logItemContainer';
 
 export class DashBoardContainer extends Component {
 
@@ -18,7 +18,9 @@ export class DashBoardContainer extends Component {
       isMenuOpen: true,
       isLoading: true,
       _log: new Log_Provider(),
-      pageTitle: 'Logs'
+      pageTitle: 'Logs List',
+      logList: [],
+      viewAs: 'list'
     }
   }
 
@@ -29,8 +31,25 @@ export class DashBoardContainer extends Component {
 
   componentDidMount() {
     this.state._log.getLogsListObservable().subscribe((res) => {
-      console.log(res);
-    })
+      this.setState({
+        logList: res.map((l, i) => <LogItemContainer
+          key={i}
+          itemAs={this.state.viewAs}
+          stateCode={l.cd_cebroker_state}
+          proCode={l.pro_cde}
+          profession={l.cd_profession}
+          licenseId={l.id_license}
+          cicleEndDate={l.dt_end}
+          status={l.ds_compl_status_returned}
+          clientId={l.id_client_nbr}
+          startLogDate={l.dt_Start_Log}
+          endLogDate={l.dt_end_log}
+          enviroment={l.cd_environment}
+          machine={l.cd_machine}
+          index={i + 1}
+        />)
+      });
+    });
   }
 
 
@@ -65,6 +84,7 @@ export class DashBoardContainer extends Component {
           isMenuOpen={this.state.isMenuOpen}
           toggleSideMenu={this.toggleSideMenu}
           pageTitle={this.state.pageTitle}
+          logs={this.state.logList}
         />
       </div>
     )

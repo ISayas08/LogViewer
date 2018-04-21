@@ -1,0 +1,29 @@
+.contentItem {
+    height: 0px;
+    overflow-y: hidden;
+    margin-left: 20px;
+    transition: 0.3s;
+}
+
+.titleLog {
+    padding: 15px;
+    border-radius: 7.5px;
+    color: #2c2c2c;
+    font-size: 1.3rem;
+}
+
+.logItem:nth-child(odd) .titleLog {
+    background-color: #cbe9fd;
+}
+
+.logItem:nth-child(even) .titleLog {
+    background-color: #dfe1e2;
+}
+
+.displayedLog {
+    height: 320px;
+}
+
+.itemListStatus {
+    right: 10px;
+}
