@@ -1,17 +1,51 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 
 import { DashboardPresentational } from './dashboardPresentational';
+import { SideMenuContainer } from '../sideMenu/sideMenuContainer';
 
-export default class DashBoardContainer extends Component {
-  static propTypes = {
-    prop: PropTypes
+export class DashBoardContainer extends Component {
+
+  //=================================================================
+  //  Constructor.
+  //=================================================================
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isMenuOpen: true
+    }
+  }
+
+  //=================================================================
+  //  Main methods.
+  //=================================================================
+
+  //=================================================================
+  //  Events.
+  //=================================================================
+
+  //=================================================================
+  //  Render.
+  //=================================================================
+
+  toggleSideMenu = () => {
+    this.setState({
+      isMenuOpen: !this.state.isMenuOpen
+    });
   }
 
   render() {
     return (
       <div>
-        <DashboardPresentational />
+        <SideMenuContainer
+          isMenuOpen={this.state.isMenuOpen}
+          toggleSideMenu={this.toggleSideMenu}
+        />
+        <DashboardPresentational
+          isMenuOpen={this.state.isMenuOpen}
+          toggleSideMenu={this.toggleSideMenu}
+        />
       </div>
     )
   }

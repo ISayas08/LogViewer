@@ -1,8 +1,9 @@
 import React from 'react';
 import { Route } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { DashBoardContainer } from '../../components/dashBoard/dashboardContainer';
+import { LogsListContainer } from '../../components/logsList/logsListContainer';
 
-import { DashboardPresentational } from "../../components/dashBoard/dashboardPresentational";
-import { LogsListPresentational } from "../../components/logsList/logsListPresentational";
 
 let instance = null;
 export class Route_provider {
@@ -16,8 +17,8 @@ export class Route_provider {
         //Variables
         this.BASIC_ROUTE = '/log-viewer';
         this.routes = [
-            { route: `${this.BASIC_ROUTE}/logs`, component: LogsListPresentational },
-            { route: `${this.BASIC_ROUTE}/dashboard`, component: DashboardPresentational }
+            { title: 'Home', route: `${this.BASIC_ROUTE}/dashboard`, component: DashBoardContainer },
+            { title: 'Logs', route: `${this.BASIC_ROUTE}/logs`, component: LogsListContainer }
         ]
 
         //Return always the same instance.
@@ -32,16 +33,22 @@ export class Route_provider {
         return this.BASIC_ROUTE;
     }
 
-    getLogsRoute() {
+    getDashboardRoute() {
         return this.routes[0];
     }
 
-    getDashboardRoute() {
+    getLogsRoute() {
         return this.routes[1];
     }
 
     getRoutes() {
         return this.routes;
+    }
+
+    getMapedRoutesAsLinks() {
+        return this.routes.map((r, i) => <NavLink className='mItem' activeClassName='active' key={i} to={r.route}>
+            {r.title}
+        </NavLink>)
     }
 
     getMapedRoutes() {

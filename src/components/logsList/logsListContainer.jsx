@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { LogsListPresentational } from './logsListPresentational';
 
-export default class LogsListContainer extends Component {
+export class LogsListContainer extends Component {
     static propTypes = {
         prop: PropTypes
     }

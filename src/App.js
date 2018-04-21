@@ -7,11 +7,11 @@ import { RouteManager } from './components/routemanager/routeManager';
 class App extends Component {
   render() {
     return (
-      <div>
-        <BrowserRouter>
+      <BrowserRouter>
+        <div className="row">
           <RouteManager />
-        </BrowserRouter>
-      </div>
+        </div>
+      </BrowserRouter>
     );
   }
 }
