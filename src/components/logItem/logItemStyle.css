@@ -3,13 +3,14 @@
     overflow-y: hidden;
     margin-left: 20px;
     transition: 0.3s;
+    font-size: 1.8rem;
 }
 
 .titleLog {
     padding: 15px;
     border-radius: 7.5px;
     color: #2c2c2c;
-    font-size: 1.3rem;
+    font-size: 2rem;
 }
 
 .logItem:nth-child(odd) .titleLog {
@@ -21,7 +22,8 @@
 }
 
 .displayedLog {
-    height: 320px;
+    height: 350px;
+    padding-top: 10px;
 }
 
 .itemListStatus {
