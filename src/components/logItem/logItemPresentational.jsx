@@ -13,39 +13,39 @@ export const LogItemPresentational = props => {
         </div>
         <div className={!props.isDisplayed ? "contentItem" : "contentItem displayedLog"}>
             {props.profession && <p>
-                <span>Profession: </span><span>{props.profession}</span>
+                <span className="text_bold">Profession: </span><span>{props.profession}</span>
             </p>}
 
             {props.licenseId && <p>
-                <span>License ID: </span><span>{props.licenseId}</span>
+                <span className="text_bold">License ID: </span><span>{props.licenseId}</span>
             </p>}
 
             {props.cicleEndDate && <p>
-                <span>Cycle End Date: </span><span>{props.cicleEndDate}</span>
+                <span className="text_bold">Cycle End Date: </span><span>{props.cicleEndDate}</span>
             </p>}
 
             {props.status && <p>
-                <span>Compliance Status: </span><span>{props.status}</span>
+                <span className="text_bold">Compliance Status: </span><span>{props.status}</span>
             </p>}
 
             {props.clientId && <p>
-                <span>Client ID: </span><span>{props.clientId}</span>
+                <span className="text_bold">Client ID: </span><span>{props.clientId}</span>
             </p>}
 
             {props.startLogDate && <p>
-                <span>Start Log Date: </span><span>{props.startLogDate}</span>
+                <span className="text_bold">Start Log Date: </span><span>{props.startLogDate}</span>
             </p>}
 
             {props.endLogDate && <p>
-                <span>End Log Date: </span><span>{props.endLogDate}</span>
+                <span className="text_bold">End Log Date: </span><span>{props.endLogDate}</span>
             </p>}
 
             {props.enviroment && <p>
-                <span>Environment: </span><span>{props.enviroment}</span>
+                <span className="text_bold">Environment: </span><span>{props.enviroment}</span>
             </p>}
 
             {props.machine && <p>
-                <span>Machine: </span><span>{props.machine}</span>
+                <span className="text_bold">Machine: </span><span>{props.machine}</span>
             </p>}
         </div>
     </div>;

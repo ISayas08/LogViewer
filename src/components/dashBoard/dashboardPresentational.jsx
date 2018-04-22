@@ -27,13 +27,13 @@ export const DashboardPresentational = props => {
         </section>
         <section className="row pages">
             <div className="col_s_12 col_m_12 col_l_12 text_center">
-                <Pagination
+                {!props.isLoading && <Pagination
                     hideDisabled
                     activePage={props.page}
                     itemsCountPerPage={1}
                     totalItemsCount={props.totalPages}
                     onChange={props.onPageChange}
-                />
+                />}
             </div>
         </section>
     </div>;

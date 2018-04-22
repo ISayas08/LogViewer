@@ -406,8 +406,9 @@ body {
 }
 
 .active {
-    background-color: #3a27e6;
+    background-color: #b0d2ff;
     color: #000000 !important;
+    font-weight: bold;
 }
 
 .noMargin {

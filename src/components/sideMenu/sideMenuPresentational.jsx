@@ -6,7 +6,8 @@ export const SideMenuPresentational = props => {
         <a className="closebtn pointer" onClick={props.toggleSideMenu}>&times;</a>
         <div className="row">
             <div className="col_s_12 col_l_12 col_m_12 text_center">
-                <img className="logo" src={props._R.getLogoUrl()} alt="" />
+                <img className="logo" src={props._R.getLogoUrl()} alt="" /><br/>
+                <label className="slogan">Log Viewer</label>
             </div>
         </div>
         {props.links}
