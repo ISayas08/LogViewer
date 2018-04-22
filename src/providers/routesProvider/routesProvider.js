@@ -2,7 +2,7 @@ import React from 'react';
 import { Route } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { DashBoardContainer } from '../../components/dashBoard/dashboardContainer';
-import { LogsListContainer } from '../../components/logsList/logsListContainer';
+import { StatisticsContainer } from '../../components/statistics/statisticsContainer';
 
 
 let instance = null;
@@ -18,7 +18,7 @@ export class Route_provider {
         this.BASIC_ROUTE = '/log-viewer';
         this.routes = [
             { title: 'Home', route: `${this.BASIC_ROUTE}/dashboard`, component: DashBoardContainer },
-            { title: 'Logs', route: `${this.BASIC_ROUTE}/logs`, component: LogsListContainer }
+            { title: 'Statistics', route: `${this.BASIC_ROUTE}/logs`, component: StatisticsContainer }
         ]
 
         //Return always the same instance.

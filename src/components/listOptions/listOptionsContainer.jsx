@@ -18,6 +18,7 @@ export class ListOptionsContainer extends Component {
             startDate: '',
             endDate: '',
             currentState: '',
+            isLoading: true,
             isDisplayed: false,
             _searchOptions: new Search_Provider(),
             _date: new Date_provider(),
@@ -38,9 +39,15 @@ export class ListOptionsContainer extends Component {
             this.state._searchOptions.getSortParam().subscribe(sortParam => {
                 this.setState({
                     sortParam: sortParam
-                })
-            })
-        })
+                });
+            });
+        });
+
+        this.state._log.getIsLoad().subscribe(load => {
+            this.setState({
+                isLoading: load
+            });
+        });
     }
     //===========================================================
     // Events.
@@ -64,19 +71,23 @@ export class ListOptionsContainer extends Component {
     }
 
     onApply = () => {
-        this.state._searchOptions.emitAllParams({
-            startDate: this.state._date.getFormattedDate(moment(this.state.startDate)),
-            endDate: this.state._date.getFormattedDate(moment(this.state.endDate)),
-            state: this.state.currentState
-        });
-        this.toggleOptions();
-        this.state._log.emitNewIsLoad(true);
+        if (!this.state.isLoading) {
+            this.state._searchOptions.emitAllParams({
+                startDate: this.state._date.getFormattedDate(moment(this.state.startDate)),
+                endDate: this.state._date.getFormattedDate(moment(this.state.endDate)),
+                state: this.state.currentState
+            });
+            this.toggleOptions();
+            this.state._log.emitNewIsLoad(true);
+        }
     }
 
     toggleOptions = () => {
-        this.setState({
-            isDisplayed: !this.state.isDisplayed
-        })
+        if (!this.state.isLoading) {
+            this.setState({
+                isDisplayed: !this.state.isDisplayed
+            });
+        }
     }
 
     //===========================================================
@@ -95,6 +106,7 @@ export class ListOptionsContainer extends Component {
             onApply={this.onApply}
             toggleOptions={this.toggleOptions}
             isDisplayed={this.state.isDisplayed}
+            isLoading={this.state.isLoading}
         />
     }
 }

@@ -3,7 +3,11 @@ import './listOptionsStyle.css';
 
 export const ListOptionsPresentational = props => {
     return <div className="relative">
-        <div onClick={props.toggleOptions} className="text_right optionButtonContainer"><span className="optionsDiv">List options</span></div>
+        <div className="text_right optionButtonContainer">
+            <span onClick={props.toggleOptions}
+                className={props.isLoading ? "optionsDiv not_allowed" : "optionsDiv"}
+            > List options</span>
+        </div>
         <div className={props.isDisplayed ? "optionBox displayedOptonBox" : "optionBox"}>
             <p>
                 <label>Sort by:</label><br />
@@ -37,7 +41,7 @@ export const ListOptionsPresentational = props => {
                         value={props.currentState}
                         onChange={props.onInputChange}
                     >
-                        {props.states.map((p,i) => <option key={i} value={p}>{p}</option>)}
+                        {props.states.map((p, i) => <option key={i} value={p}>{p}</option>)}
                     </select>
                 </p>
                 <p>
