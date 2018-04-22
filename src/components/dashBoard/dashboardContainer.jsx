@@ -35,6 +35,12 @@ export class DashBoardContainer extends Component {
   //=================================================================
 
   componentDidMount() {
+    this.state._log.getIsLoad().subscribe(loading => {
+      this.setState({
+        isLoading: loading
+      });
+    });
+
     this.state._log.getLogsListObservable().subscribe((res) => {
       this.setState({
         totalLogList: res,
@@ -43,6 +49,7 @@ export class DashBoardContainer extends Component {
         this.setOptionsValues();
       });
     });
+
   }
 
 
@@ -136,6 +143,8 @@ export class DashBoardContainer extends Component {
           limit={this.state.limit}
           totalPages={this.state.totalPages}
           onPageChange={this.onPageChange}
+          //loading
+          isLoading={this.state.isLoading}
         />
       </div>
     )

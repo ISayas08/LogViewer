@@ -2,6 +2,7 @@ import React from 'react';
 import Pagination from "react-js-pagination";
 import './dashboardStyle.css';
 import { ListOptionsContainer } from '../listOptions/listOptionsContainer';
+import { Loading } from '../loading/loading';
 
 // Estateless functional component.
 export const DashboardPresentational = props => {
@@ -19,8 +20,12 @@ export const DashboardPresentational = props => {
             </div>
         </header>
         <section className="row logsList">
-            <div className="col_s_12 col_m_12 col_l_12">
-                {props.mapList(props.applyPagination(props.logs, props.page, props.limit))}
+            <div className={props.isLoading ? "col_s_12 col_m_12 col_l_12 text_center" : "col_s_12 col_m_12 col_l_12"}>
+                {props.isLoading ? <Loading />
+                    : props.logs.length > 0 ?
+                        props.mapList(props.applyPagination(props.logs, props.page, props.limit)) :
+                        <div className="alert">No logs found</div>
+                }
             </div>
         </section>
         <section className="row pages">

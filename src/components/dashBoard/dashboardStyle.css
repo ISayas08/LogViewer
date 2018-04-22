@@ -5,3 +5,10 @@
 .pages {
     margin-bottom: 40px;
 }
+
+.alert {
+    width: 100%;
+    padding: 30px;
+    background-color: bisque;
+    font-size: 3rem;
+}

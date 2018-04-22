@@ -3,6 +3,7 @@ import * as moment from 'moment';
 import { ListOptionsPresentational } from './listOptionsPresentational';
 import { Search_Provider } from '../../providers/searchFilterConfigProvider/searchFilterConfigProvider';
 import { Date_provider } from '../../providers/dateProvider/dateProvider';
+import { Log_Provider } from '../../providers/logsProvider/logProvider';
 
 export class ListOptionsContainer extends Component {
     //===========================================================
@@ -19,7 +20,8 @@ export class ListOptionsContainer extends Component {
             currentState: '',
             isDisplayed: false,
             _searchOptions: new Search_Provider(),
-            _date: new Date_provider()
+            _date: new Date_provider(),
+            _log: new Log_Provider()
         }
     }
 
@@ -54,7 +56,10 @@ export class ListOptionsContainer extends Component {
             endDate: id === 'endtDate' ? value : this.state.endDate,
             currentState: id === 'stateSelect' ? value : this.state.currentState
         }, () => {
-            if (id === 'sortSelect') this.state._searchOptions.emitNewSortParam(value)
+            if (id === 'sortSelect') {
+                this.state._searchOptions.emitNewSortParam(value);
+                this.toggleOptions();
+            }
         })
     }
 
@@ -64,7 +69,8 @@ export class ListOptionsContainer extends Component {
             endDate: this.state._date.getFormattedDate(moment(this.state.endDate)),
             state: this.state.currentState
         });
-        this.toggleOptions()
+        this.toggleOptions();
+        this.state._log.emitNewIsLoad(true);
     }
 
     toggleOptions = () => {

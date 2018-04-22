@@ -38,7 +38,7 @@ export class Log_Provider {
             if (!err) {
                 //Emit a new value for log's array.
                 this.logs$.next(res.body);
-                console.log(res.body);
+                this.emitNewIsLoad(false);
             } else {
                 console.log('Error: ' + err);
             }
@@ -62,6 +62,6 @@ export class Log_Provider {
     //=================================================================
 
     emitNewIsLoad(value) {
-        this.isLoading$.nest(value);
+        this.isLoading$.next(value);
     }
 }
