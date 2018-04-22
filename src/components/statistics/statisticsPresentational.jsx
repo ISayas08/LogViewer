@@ -13,7 +13,7 @@ export const LogsListPresentational = props => {
         <section className="row logsList">
             <div className={props.isLoading ? "col_s_12 col_m_12 col_l_12 text_center" : "col_s_12 col_m_12 col_l_12"}>
                 {props.isLoading ? <Loading />
-                    : <div className="alert">Statistics not available</div>
+                    : <div className="alert">Stats not available</div>
                 }
             </div>
         </section>

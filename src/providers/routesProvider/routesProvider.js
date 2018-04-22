@@ -18,7 +18,7 @@ export class Route_provider {
         this.BASIC_ROUTE = '/log-viewer';
         this.routes = [
             { title: 'Home', route: `${this.BASIC_ROUTE}/dashboard`, component: DashBoardContainer },
-            { title: 'Statistics', route: `${this.BASIC_ROUTE}/logs`, component: StatisticsContainer }
+            { title: 'Stats', route: `${this.BASIC_ROUTE}/logs`, component: StatisticsContainer }
         ]
 
         //Return always the same instance.

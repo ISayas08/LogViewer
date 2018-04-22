@@ -15,7 +15,7 @@ export class StatisticsContainer extends Component {
         this.state = {
             isMenuOpen: true,
             isLoading: true,
-            pageTitle: 'Statistics',
+            pageTitle: 'Stats',
             _log: new Log_Provider(),
         }
     }
