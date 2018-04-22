@@ -1,3 +1,4 @@
+import * as moment from 'moment';
 
 let instance = null;
 export class Date_provider {
@@ -24,11 +25,19 @@ export class Date_provider {
      * @param {Object} date This parameter is the date will be formatted,
      * if it is not available, the current date will be assumed.
      */
-    getFormattedDate(date = new Date()) {
-        var day = date.getDate();
-        var month = date.getMonth() + 1;
-        var year = date.getFullYear();
+    getFormattedDate(date = moment()) {
+        let day = date.date();
+        let month = date.month() + 1;
+        let year = date.year();
 
         return month + '/' + day + '/' + year;
+    }
+
+    getDateAsHTMLFormat(date = moment()) {
+        let day = date.date();
+        let month = date.month() + 1;
+        let year = date.year();
+
+        return year + '-' + (month < 10 ? '0' + month : month) + '-' + (day < 10 ? '0' + day : day);
     }
 }

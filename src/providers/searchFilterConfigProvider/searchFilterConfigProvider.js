@@ -14,6 +14,10 @@ export class Search_Provider {
             instance = this;
         }
 
+        //variables
+        this.statesCodes = ['OH', 'FL', 'GA', 'LA'];
+        this.sortParams = [];
+
         //Other providers
         this._date = new Date_provider();
 
@@ -23,12 +27,10 @@ export class Search_Provider {
         this.searchParams$ = new BehaviorSubject({
             startDate: currentDate,
             endDate: currentDate,
-            state: 'FL',
-            sortBy: 'dt_Start_Log'
+            state: 'FL'
         });
 
-        //Valid vormat: dd/mm/yyyy, dd-mm-yyyy, dd.mm.yyyy  
-        this.dateFormatPattern = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
+        this.sortParam$ = new BehaviorSubject('dt_Start_Log');
 
         //Valid values: FL, LA, GA, oH
         this.stateFormatPattern = /^FL$|^LA$|^GA$|^OH$/;
@@ -45,34 +47,44 @@ export class Search_Provider {
         return this.searchParams$;
     }
 
+    getSortParam() {
+        return this.sortParam$;
+    }
+
+    getStatesCodes() {
+        return this.statesCodes;
+    }
+
+    getSortParams() {
+        return this.sortParams;
+    }
+
     //=================================================================
     //  Emmiters.
     //=================================================================
 
     emitNewStartLogdate(date) {
-        if (date !== '' && this.dateFormatPattern.test(date)) {
-            let normalizedDate = date.replace('/-|./', '/');
+        if (date !== '') {
+            let normalizedDate = date.replace('/-|./g', '/');
 
             const currentParamsValues = this.searchParams$.value;
             this.searchParams$.next({
                 startDate: normalizedDate,
                 endDate: currentParamsValues.endDate,
-                state: currentParamsValues.state,
-                sortBy: currentParamsValues.sortBy
+                state: currentParamsValues.state
             });
         }
     }
 
     emitNewEndLogdate(date) {
-        if (date !== '' && this.dateFormatPattern.test(date)) {
-            let normalizedDate = date.replace('/-|./', '/');
+        if (date !== '') {
+            let normalizedDate = date.replace('/-|./g', '/');
 
             const currentParamsValues = this.searchParams$.value;
             this.searchParams$.next({
                 startDate: currentParamsValues.startDate,
                 endDate: normalizedDate,
-                state: currentParamsValues.state,
-                sortBy: currentParamsValues.sortBy
+                state: currentParamsValues.state
             });
         }
     }
@@ -84,19 +96,31 @@ export class Search_Provider {
             this.searchParams$.next({
                 startDate: currentParamsValues.startDate,
                 endDate: currentParamsValues.endDate,
-                state: state,
-                sortBy: currentParamsValues.sortBy
+                state: state
             });
         }
     }
 
-    emitNewSortParam(sortPram) {
-        const currentParamsValues = this.searchParams$.value;
-        this.searchParams$.next({
-            startDate: currentParamsValues.startDate,
-            endDate: currentParamsValues.endDate,
-            state: currentParamsValues.state,
-            sortBy: sortPram === '' ? 'dt_Start_Log' : sortPram
-        });
+    emitAllParams(params) {
+        if (
+            params
+            && this.stateFormatPattern.test(params.state)
+        ) {
+            this.searchParams$.next({
+                startDate: params.startDate,
+                endDate: params.endDate,
+                state: params.state
+            });
+        }
+    }
+
+    emitNewSortParam(sort) {
+        if (sort && sort !== '') {
+            this.sortParam$.next(sort);
+        }
+    }
+
+    setSortParams(sortParams) {
+        this.sortParams = sortParams;
     }
 }

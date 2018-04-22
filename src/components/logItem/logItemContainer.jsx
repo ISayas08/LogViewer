@@ -8,7 +8,6 @@ export  class LogItemContainer extends Component {
     //  Props.
     //============================================================
     static propTypes = {
-        itemAs: PropTypes.oneOf(['list', 'card',]),
         stateCode: PropTypes.string,
         proCode: PropTypes.number,
         profession: PropTypes.string,
@@ -21,10 +20,6 @@ export  class LogItemContainer extends Component {
         enviroment: PropTypes.string,
         machine: PropTypes.string,
         index: PropTypes.number
-    }
-
-    static defaultProps = {
-        itemAs: 'list'
     }
 
     //============================================================

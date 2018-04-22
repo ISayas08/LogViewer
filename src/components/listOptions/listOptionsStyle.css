@@ -1,0 +1,59 @@
+.optionBox {
+    overflow: hidden;
+    height: 0px;
+    transition: 0.2s;
+    margin-right: 10px;
+    position: absolute;
+    z-index: 1;
+    width: 300px;
+    right: 0px;
+}
+
+.optionBox input:not([type='button']),
+.optionBox select {
+    width: 100%;
+    padding: 8px;
+}
+
+input[type='button'] {
+    padding: 10px;
+    background-color: #3db1ff;
+    border-radius: 7.5px 7.5px 7.5px 7.5px;
+    color: whitesmoke;
+    cursor: pointer;
+    border: none;
+}
+
+.displayedOptonBox {
+    height: auto;
+    padding: 20px;
+    margin-top: 20px;
+    background-color: whitesmoke;
+    box-shadow: 2px 2px 5px #c7c7c7;
+}
+
+.optionButtonContainer {
+    padding: 15px;
+}
+
+.optionsDiv {
+    font-size: 2rem;
+    padding: 15px;
+    background-color: #3db1ff;
+    border-radius: 7.5px;
+    color: whitesmoke;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.optionsDiv:hover {
+    box-shadow: 2px 2px 5px #c7c7c7;
+}
+
+.searchParams {
+    border: 1px solid #b6b6b6;
+    border-radius: 7.5px;
+    padding: 10px;
+    margin-top: 20px;
+}

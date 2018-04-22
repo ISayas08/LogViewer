@@ -23,9 +23,9 @@
 
 .displayedLog {
     height: 350px;
-    padding-top: 10px;
+    padding-top: 20px !important;
 }
 
 .itemListStatus {
-    right: 10px;
+    right: 15px;
 }

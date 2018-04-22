@@ -4,7 +4,7 @@ import { DashboardPresentational } from './dashboardPresentational';
 import { SideMenuContainer } from '../sideMenu/sideMenuContainer';
 import { Log_Provider } from '../../providers/logsProvider/logProvider';
 import { LogItemContainer } from '../logItem/logItemContainer';
-
+import { Search_Provider } from '../../providers/searchFilterConfigProvider/searchFilterConfigProvider';
 
 export class DashBoardContainer extends Component {
 
@@ -19,15 +19,16 @@ export class DashBoardContainer extends Component {
       isMenuOpen: true,
       isLoading: true,
       _log: new Log_Provider(),
+      _searchOption: new Search_Provider(),
       pageTitle: 'Logs List',
       totalLogList: [],
-      viewAs: 'list',
       currentPage: 1,
       limit: 20,
-      totalPages: 0
+      totalPages: 0,
+      sortParams: [],
+      states: []
     }
   }
-
 
   //=================================================================
   //  LifeCycle.
@@ -38,6 +39,8 @@ export class DashBoardContainer extends Component {
       this.setState({
         totalLogList: res,
         totalPages: Math.ceil(res.length / this.state.limit)
+      }, () => {
+        this.setOptionsValues();
       });
     });
   }
@@ -68,6 +71,28 @@ export class DashBoardContainer extends Component {
 
   applyPagination = (list, page, limit) => list.slice(limit * (page - 1), limit * page);
 
+  setOptionsValues() {
+    if (this.state.totalLogList.length > 0) {
+      let aux = [];
+      for (let key in this.state.totalLogList[0]) {
+        aux.push(key);
+      }
+
+      this.state._searchOption.setSortParams(aux);
+
+      this.state._searchOption.getSortParam().subscribe(param => {
+        let aux = this.state.totalLogList.sort((a, b) => {
+          let x = a[param];
+          let y = b[param];
+          return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+        });
+
+        this.setState({
+          totalLogList: aux
+        })
+      })
+    }
+  }
   //=================================================================
   //  Events.
   //=================================================================
@@ -98,14 +123,17 @@ export class DashBoardContainer extends Component {
         />
 
         <DashboardPresentational
+          pageTitle={this.state.pageTitle}
+          //Menu
           isMenuOpen={this.state.isMenuOpen}
           toggleSideMenu={this.toggleSideMenu}
-          pageTitle={this.state.pageTitle}
+          //LogsList
           logs={this.state.totalLogList}
+          mapList={this.mapList}
+          applyPagination={this.applyPagination}
+          // Paginado
           page={this.state.currentPage}
           limit={this.state.limit}
-          applyPagination={this.applyPagination}
-          mapList={this.mapList}
           totalPages={this.state.totalPages}
           onPageChange={this.onPageChange}
         />
